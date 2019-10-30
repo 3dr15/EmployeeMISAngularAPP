@@ -10,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesComponent implements OnInit {
 
-  employees: Employee[];
+  // employees: Employee[];
+  employees: string;
   selectedEmp: Employee;
   onSelect(employee: Employee): void {
     this.selectedEmp = employee;
@@ -21,6 +22,7 @@ export class EmployeesComponent implements OnInit {
   getEmployees(): void {
     // this.employees = this.employeeService.getEmployees();
     this.employeeService.getEmployees().subscribe(emp => this.employees = emp);
+    console.log(this.employees);
   }
 
   ngOnInit() {

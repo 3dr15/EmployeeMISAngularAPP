@@ -7,7 +7,6 @@ import { EmployeesComponent } from './employees/employees.component';
 import { from } from 'rxjs';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

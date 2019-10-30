@@ -10,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesComponent implements OnInit {
 
-  // employees: Employee[];
-  employees: string;
+   employees: Employee[];
+  // employees: string;
   selectedEmp: Employee;
   onSelect(employee: Employee): void {
     this.selectedEmp = employee;

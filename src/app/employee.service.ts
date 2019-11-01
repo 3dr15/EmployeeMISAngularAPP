@@ -12,7 +12,7 @@ export class EmployeeService {
 getEmployees(): Observable<Employee[]> {
   // return of(EMPLOYEES);
   return this.httpClient.get<Employee[]>('https://localhost:44391/api/employee');
-  // return this.httpClient.get<Employee[]>('https://localhost:44375/api/employee/');
+  // return this.httpClient.get<Employee[]>('https://localhost:44375/api/employee');
 
 }
 constructor(private httpClient: HttpClient) { }

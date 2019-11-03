@@ -1,29 +1,33 @@
-
-        <h2>Employee List</h2>
-        <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-        
-              <th>Sno.</th>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Email</th>
-              <th>Contact</th>
-        
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let employee of employees; let i = index" [class.selected]="employee === selectedEmp" (click)="onSelect(employee)">
-              <td>{{ i+1 }}</td>
-              <td>{{ employee.firstName | uppercase }}</td>
-              <td>{{ employee.lastName | uppercase }}</td>
-              <td><a href='mailto:{{ employee.email }}'>{{ employee.email }}</a></td>
-              <td>{{ employee.phoneNumber }}</td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-        
-        <app-employee-details [employee]="selectedEmp"></app-employee-details>
+<hr>
+<div class="row">
+  <div class="col-md-4">
+      <h3>Employee Form</h3>
+    <app-employee-details [employee]="selectedEmp"></app-employee-details>
+  </div>
+  <div class="col-md-8">
+    <h3>Employees List</h3>
+    <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Sno.</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; let i = index" [class.selected]="employee === selectedEmp" (click)="onSelect(employee)">
+          <td>{{ i+1 }}</td>
+          <td>{{ employee.firstName | uppercase }}</td>
+          <td>{{ employee.lastName | uppercase }}</td>
+          <td><a href='mailto:{{ employee.email }}'>{{ employee.email }}</a></td>
+          <td>{{ employee.phoneNumber }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
         

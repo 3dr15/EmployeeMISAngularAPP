@@ -1,6 +1,8 @@
 import { EmployeeService } from './../employee.service';
 import { Employee } from './../employee';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Console } from '@angular/core/src/console';
 // import {EMPLOYEES} from '../test-employees';
 
 @Component({
@@ -10,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesComponent implements OnInit {
 
+  constructor(protected employeeService: EmployeeService) { }
   employees: Employee[];
   // employees: string;
   selectedEmp: Employee;
@@ -17,7 +20,16 @@ export class EmployeesComponent implements OnInit {
     this.selectedEmp = employee;
   }
 
-  constructor(protected employeeService: EmployeeService) { }
+  onPost(formData: NgForm) {
+    this.employeeService.postEmployee(formData.value).subscribe(
+      res => {
+        console.log('Successfull');
+      },
+      err => {
+        console.log('Something Went Wrong');
+      }
+      );
+  }
 
   getEmployees(): void {
     // this.employees = this.employeeService.getEmployees();

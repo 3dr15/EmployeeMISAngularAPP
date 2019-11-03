@@ -1,20 +1,30 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EMPLOYEES } from './test-employees';
+// import { EMPLOYEES } from './test-employees';
 import { Employee } from './employee';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-getEmployees(): Observable<Employee[]> {
-  // return of(EMPLOYEES);
-  return this.httpClient.get<Employee[]>('https://localhost:44391/api/employee');
-  // return this.httpClient.get<Employee[]>('https://localhost:44375/api/employee');
+  readonly apiRoot: string = 'https://localhost:44391/api';
 
-}
-constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
+  getEmployees(): Observable<Employee[]> {
+    // return of(EMPLOYEES);
+    return this.httpClient.get<Employee[]>(this.apiRoot + '/employee');
+    // return this.httpClient.get<Employee[]>('https://localhost:44375/api/employee');
+  }
+
+  getEmployee(employee: Employee): Observable<Employee> {
+    return this.httpClient.get<Employee>(this.apiRoot + '/employee/' + employee.id);
+  }
+
+  postEmployee(employeeFormData: Employee): Observable<object> {
+    return this.httpClient.post(this.apiRoot + '/employee', employeeFormData);
+  }
 }

@@ -1,11 +1,11 @@
-export class Employee{
-    id: string;
+export class Employee {
+    id: number;
     firstName: string;
     lastName: string;
     phoneNumber: number;
     docProofLink: string;
     email: string;
     password: string;
-    departmentId: string;
+    departmentId: number;
     salary: number;
 }

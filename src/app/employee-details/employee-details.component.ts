@@ -1,6 +1,6 @@
 import { from } from 'rxjs';
 import { Employee } from './../employee';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { NgForm } from '@angular/forms';
 
@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 export class EmployeeDetailsComponent implements OnInit {
 
   @Input() employee: Employee;
+  @Output() Notify = new EventEmitter<boolean>();
   constructor(protected employeeService: EmployeeService) { }
 
   ngOnInit() {
@@ -19,20 +20,50 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   onSubmit(formData: NgForm) {
+    if (formData.value.id === 0) {
+      this.postEmployee(formData);
+    } else {
+      if (confirm('Are you sure you want to update employee information ?')) {
+        this.updateEmployee(formData);
+      }
+    }
+  }
+
+  postEmployee(formData: NgForm) {
     this.employeeService.postEmployee(formData.value).subscribe(
       success => {
         alert('Successfull');
+        this.setNotification(true);
       },
       error => {
         console.log(error);
         alert('Somthing Went Wrong');
+        this.setNotification(false);
       }
     );
-    console.log(formData.value);
+  }
+
+  updateEmployee(formData: NgForm) {
+    this.employeeService.updateEmployee(formData.value).subscribe(
+      success => {
+        alert('Successfull');
+        // this.getEmployees();
+        this.setNotification(true);
+      },
+      error => {
+        console.log(error);
+        alert('Somthing Went Wrong');
+        this.setNotification(false);
+      }
+    );
+  }
+
+  setNotification(status: boolean) {
+     this.Notify.emit(status);
   }
   resetFormFields(formData?: NgForm) {
     if (formData != null) {
-      formData.resetForm();
+       formData.resetForm();
     }
     this.employee = {
       id: 0,

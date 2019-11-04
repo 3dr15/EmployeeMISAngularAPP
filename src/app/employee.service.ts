@@ -27,4 +27,12 @@ export class EmployeeService {
   postEmployee(employeeFormData: Employee): Observable<object> {
     return this.httpClient.post(this.apiRoot + '/employee', employeeFormData);
   }
+
+  updateEmployee(employeeFormData: Employee): Observable<object> {
+    return this.httpClient.put(this.apiRoot + '/employee/' + employeeFormData.id, employeeFormData);
+  }
+
+  deleteEmployee(employee: Employee): Observable<object> {
+    return this.httpClient.delete(this.apiRoot + '/employee/' + employee.id);
+  }
 }

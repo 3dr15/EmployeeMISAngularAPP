@@ -16,19 +16,27 @@ export class EmployeesComponent implements OnInit {
   employees: Employee[];
   // employees: string;
   selectedEmp: Employee;
+  ngOnInit() {
+    this.getEmployees();
+    // this.resetFormFields();
+  }
+
   onSelect(employee: Employee): void {
     this.selectedEmp = employee;
   }
 
-  onPost(formData: NgForm) {
-    this.employeeService.postEmployee(formData.value).subscribe(
-      res => {
-        console.log('Successfull');
-      },
-      err => {
-        console.log('Something Went Wrong');
-      }
+  onDelete(employee: Employee) {
+    if (confirm('Are you sure you want to delete employee ?')) {
+      this.employeeService.deleteEmployee(employee).subscribe(
+        success => {
+          alert('Employee Deleted');
+          this.getEmployees();
+        },
+        error => {
+          alert('Something went wrong');
+        }
       );
+    }
   }
 
   getEmployees(): void {
@@ -37,8 +45,11 @@ export class EmployeesComponent implements OnInit {
     // console.log(this.employees);
   }
 
-  ngOnInit() {
-    this.getEmployees();
+
+  getNotification(event: any) {
+    if (event === true) {
+      this.getEmployees();
+    }
   }
 
 }

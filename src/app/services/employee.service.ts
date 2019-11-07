@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import { EMPLOYEES } from './test-employees';
-import { Employee } from './employee';
+import { Employee } from '../model/employee';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';

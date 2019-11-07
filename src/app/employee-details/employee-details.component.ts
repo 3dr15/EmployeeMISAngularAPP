@@ -1,8 +1,10 @@
+import { DepartmentService } from './../services/department.service';
 import { from } from 'rxjs';
-import { Employee } from './../employee';
+import { Employee } from '../model/employee';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { EmployeeService } from '../employee.service';
+import { EmployeeService } from '../services/employee.service';
 import { NgForm } from '@angular/forms';
+import { Department } from '../model/department';
 
 @Component({
   selector: 'app-employee-details',
@@ -11,15 +13,23 @@ import { NgForm } from '@angular/forms';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
+  departments: Department[];
   @Input() employee: Employee;
   @Output() Notify = new EventEmitter<boolean>();
-  constructor(protected employeeService: EmployeeService) { }
+  constructor(protected employeeService: EmployeeService, protected departmentService: DepartmentService) { }
 
   ngOnInit() {
     this.resetFormFields();
+    this.getDepartments();
+  }
+
+  getDepartments() {
+    this.departmentService.getDepartments().subscribe(dep => this.departments = dep);
   }
 
   onSubmit(formData: NgForm) {
+    // tslint:disable-next-line: radix
+    formData.value.departmentId = parseInt(formData.value.departmentId);
     if (formData.value.id === 0) {
       this.postEmployee(formData);
     } else {
@@ -30,9 +40,11 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   postEmployee(formData: NgForm) {
+    console.log(formData.value);
     this.employeeService.postEmployee(formData.value).subscribe(
       success => {
         alert('Successfull');
+        this.resetFormFields();
         this.setNotification(true);
       },
       error => {
@@ -48,6 +60,7 @@ export class EmployeeDetailsComponent implements OnInit {
       success => {
         alert('Successfull');
         // this.getEmployees();
+        this.resetFormFields();
         this.setNotification(true);
       },
       error => {

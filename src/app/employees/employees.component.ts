@@ -1,5 +1,5 @@
-import { EmployeeService } from './../employee.service';
-import { Employee } from './../employee';
+import { EmployeeService } from '../services/employee.service';
+import { Employee } from '../model/employee';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Console } from '@angular/core/src/console';

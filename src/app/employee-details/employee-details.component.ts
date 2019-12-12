@@ -28,13 +28,17 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   onSubmit(formData: NgForm) {
-    // tslint:disable-next-line: radix
-    formData.value.departmentId = parseInt(formData.value.departmentId);
-    if (formData.value.id === 0) {
-      this.postEmployee(formData);
-    } else {
-      if (confirm('Are you sure you want to update employee information ?')) {
-        this.updateEmployee(formData);
+    if (!formData.invalid) {
+      // tslint:disable-next-line: radix
+      formData.value.departmentID = parseInt(formData.value.departmentID);
+      // tslint:disable-next-line: radix
+      formData.value.phoneNumber = parseInt(formData.value.phoneNumber);
+      if (formData.value.employeeID === 0) {
+        this.postEmployee(formData);
+      } else {
+        if (confirm('Are you sure you want to update employee information ?')) {
+          this.updateEmployee(formData);
+        }
       }
     }
   }
@@ -79,10 +83,10 @@ export class EmployeeDetailsComponent implements OnInit {
        formData.resetForm();
     }
     this.employee = {
-      id: 0,
+      employeeID: 0,
       firstName: '',
       lastName: '',
-      departmentId: null,
+      departmentID: null,
       docProofLink: '',
       email: '',
       password: '',

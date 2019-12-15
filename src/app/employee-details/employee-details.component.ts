@@ -16,6 +16,8 @@ export class EmployeeDetailsComponent implements OnInit {
   departments: Department[];
   @Input() employee: Employee;
   @Output() Notify = new EventEmitter<boolean>();
+  file: any;
+
   constructor(protected employeeService: EmployeeService, protected departmentService: DepartmentService) { }
 
   ngOnInit() {
@@ -23,9 +25,28 @@ export class EmployeeDetailsComponent implements OnInit {
     this.getDepartments();
   }
 
+  // File Handeling Start
+  fileUpload(event: any) {     // This event trigers while file is selected to upload
+    if (event.target.files[0]) {
+      this.file = event.target.files[0];
+      const fileReader = new FileReader();
+      fileReader.onload = this.fileLoad.bind(this);
+      fileReader.readAsBinaryString(this.file);
+      // console.log(this.file);
+    }
+  }
+
+  fileLoad(Efile) {     // Functions as a onload event for FileReader class
+    const binaryString = Efile.target.result;     // Converts that file to binary
+    this.file = btoa(binaryString);               // Converts that file to base64 String from binary
+    console.log(btoa(binaryString));
+  }
+  // File Handeling End
+
   getDepartments() {
     this.departmentService.getDepartments().subscribe(dep => this.departments = dep);
   }
+
 
   onSubmit(formData: NgForm) {
     if (!formData.invalid) {
@@ -33,6 +54,12 @@ export class EmployeeDetailsComponent implements OnInit {
       formData.value.departmentID = parseInt(formData.value.departmentID);
       // tslint:disable-next-line: radix
       formData.value.phoneNumber = parseInt(formData.value.phoneNumber);
+      // formData.value.docProofLink = btoa(formData.value.docProofLink);
+      formData.value.docProofLink = this.file;
+
+      // console.log(formData.value.docProofLink);
+      // return;
+
       if (formData.value.employeeID === 0) {
         this.postEmployee(formData);
       } else {
@@ -44,7 +71,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   postEmployee(formData: NgForm) {
-    console.log(formData.value);
+    // console.log(formData.value);
     this.employeeService.postEmployee(formData.value).subscribe(
       success => {
         alert('Successfull');

@@ -12,7 +12,7 @@
   </div>
 
 </div> -->
-<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" enctype="multipart/form-data">
   <input type="hidden" name="employeeID" #id="ngModel" [(ngModel)]="employee.employeeID" required>
   <div class="form-group">
     <label for="firstName">First Name
@@ -48,7 +48,8 @@
   <div class="form-group">
     <label for="docProofLink">Document Proof
     </label>
-    <input name="docProofLink" #docProofLink="ngModel" [(ngModel)]="employee.docProofLink" class="form-control form-control-sm" required>
+    <!-- <input name="docProofLink" #docProofLink="ngModel" [(ngModel)]="employee.docProofLink" class="form-control form-control-sm" required> -->
+    <input (change)="fileUpload($event)" name="docProofLink" #docProofLink="ngModel" [(ngModel)]="employee.docProofLink" class="form-control form-control-sm" type="file" accept=".jpeg, .jpg, .pdf" required>
     <div *ngIf="docProofLink.invalid && (docProofLink.dirty || docProofLink.touched)">
         <span *ngIf="docProofLink.errors.required"><p class="text-danger">Document Link is required</p> </span>
     </div>

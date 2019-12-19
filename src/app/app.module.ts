@@ -8,13 +8,15 @@ import { from } from 'rxjs';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DocumentComponent } from './document/document.component';
 
 
 @NgModule({
    declarations: [
       AppComponent,
       EmployeesComponent,
-      EmployeeDetailsComponent
+      EmployeeDetailsComponent,
+      DocumentComponent
    ],
    imports: [
       BrowserModule,

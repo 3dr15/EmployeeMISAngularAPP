@@ -12,13 +12,16 @@
   </div>
 
 </div> -->
-<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" enctype="multipart/form-data">
+<form #form="ngForm"  autocomplete="off" (submit)="onSubmit(form)" enctype="multipart/form-data">
   <input type="hidden" name="employeeID" #id="ngModel" [(ngModel)]="employee.employeeID" required>
   <div class="form-group">
     <label for="firstName">First Name
     </label>
-    <input name="firstName" pattern="[a-z A-Z]+" #firstName="ngModel" [(ngModel)]="employee.firstName" class="form-control form-control-sm" required >
-    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+    <input name="firstName" pattern="[a-z A-Z]+" #firstName="ngModel" 
+    [(ngModel)]="employee.firstName" 
+    class="form-control form-control-sm" required 
+    [ngClass]="{ 'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched || submitted) }">
+    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || submitted)">
       <span *ngIf="firstName.errors.required"><p class="text-danger">First Name Field is required</p> </span>
             <span *ngIf="firstName.errors.pattern"><p class="text-danger">Invalid First Name</p> </span>
     </div>
@@ -28,8 +31,10 @@
   <div class="form-group">
     <label for="lastName">Last Name
     </label>
-    <input name="lastName" pattern="[a-z A-Z]+" #lastName="ngModel" [(ngModel)]="employee.lastName" class="form-control form-control-sm" required>
-    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+    <input name="lastName" pattern="[a-z A-Z]+" #lastName="ngModel" 
+    [(ngModel)]="employee.lastName" class="form-control form-control-sm" required
+    [ngClass]="{ 'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched || submitted) }">
+    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || submitted)">
       <span *ngIf="lastName.errors.required"><p class="text-danger">Last Name Field is required</p> </span>
             <span *ngIf="lastName.errors.pattern"><p class="text-danger">Invalid Last Name</p> </span>
     </div>
@@ -38,8 +43,9 @@
   <div class="form-group">
     <label for="phoneNumber">Contact Number
     </label>
-    <input name="phoneNumber" pattern="[0-9]*" type="text" #phoneNumber="ngModel" [(ngModel)]="employee.phoneNumber" class="form-control form-control-sm" minlength="10" maxlength="10" required>
-    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+    <input name="phoneNumber" pattern="[0-9]*" type="text" #phoneNumber="ngModel" [(ngModel)]="employee.phoneNumber" class="form-control form-control-sm" minlength="10" maxlength="10" required
+    [ngClass]="{ 'is-invalid': phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched || submitted) }">
+    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched || submitted)">
       <span *ngIf="phoneNumber.errors.required"><p class="text-danger">Phone Number Field is required</p> </span>
       <span *ngIf="(phoneNumber.errors.minlength || phoneNumber.errors.maxlength || phoneNumber.errors.pattern)"><p class="text-danger">Invalid Phone Number</p> </span>
     </div>
@@ -49,8 +55,9 @@
     <label for="docProofLink">Document Proof
     </label>
     <!-- <input name="docProofLink" #docProofLink="ngModel" [(ngModel)]="employee.docProofLink" class="form-control form-control-sm" required> -->
-    <input (change)="fileUpload($event)" name="docProofLink" #docProofLink="ngModel" [(ngModel)]="employee.docProofLink" class="form-control form-control-sm" type="file" accept=".jpeg, .jpg, .pdf" required>
-    <div *ngIf="docProofLink.invalid && (docProofLink.dirty || docProofLink.touched)">
+    <input (change)="fileUpload($event)" name="docProofLink" #docProofLink="ngModel" [(ngModel)]="employee.docProofLink" class="form-control form-control-sm" type="file" accept=".jpeg, .jpg, .pdf" required
+    [ngClass]="{ 'is-invalid': docProofLink.invalid && (docProofLink.dirty || docProofLink.touched || submitted) }">
+    <div *ngIf="docProofLink.invalid && (docProofLink.dirty || docProofLink.touched || submitted)">
         <span *ngIf="docProofLink.errors.required"><p class="text-danger">Document Link is required</p> </span>
     </div>
   </div>
@@ -58,8 +65,9 @@
   <div class="form-group">
     <label for="email">Email Address
     </label>
-    <input name="email" type="email" #email="ngModel" [(ngModel)]="employee.email" class="form-control form-control-sm" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+    <input name="email" type="email" #email="ngModel" [(ngModel)]="employee.email" class="form-control form-control-sm" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
+    [ngClass]="{ 'is-invalid': email.invalid && (email.dirty || email.touched || submitted) }">
+    <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)">
         <span *ngIf="email.errors.required"><p class="text-danger">Email Field is required</p> </span>
         <span *ngIf="email.errors.pattern"><p class="text-danger">Invalid Email</p> </span>
     </div>
@@ -68,8 +76,9 @@
   <div class="form-group">
     <label for="password">Password
     </label>
-    <input name="password" #password="ngModel" [(ngModel)]="employee.password" class="form-control form-control-sm" pattern=".{6,}" required>
-    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+    <input name="password" #password="ngModel" [(ngModel)]="employee.password" class="form-control form-control-sm" pattern=".{6,}" required
+    [ngClass]="{ 'is-invalid': password.invalid && (password.dirty || password.touched || submitted) }">
+    <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)">
       <span *ngIf="password.errors.required"><p class="text-danger">Password Field is required</p> </span>
       <span *ngIf="password.errors.pattern"><p class="text-danger">Password Must Contain 6 or More Characters</p> </span>
     </div>
@@ -78,10 +87,11 @@
   <div class="form-group">
     <label for="departmentID">Department
     </label>
-    <select name="departmentID" type="number" #departmentID="ngModel" [(ngModel)]="employee.departmentID" class="form-control form-control-sm" required>
+    <select name="departmentID" type="number" #departmentID="ngModel" [(ngModel)]="employee.departmentID" class="form-control form-control-sm" required
+    [ngClass]="{ 'is-invalid': departmentID.invalid && (departmentID.dirty || departmentID.touched || submitted) }">
       <option *ngFor="let department of departments" value="{{ department.departmentID }}">{{ department.departmentName }}</option>
     </select>
-    <div *ngIf="departmentID.invalid && (departmentID.dirty || departmentID.touched)">
+    <div *ngIf="departmentID.invalid && (departmentID.dirty || departmentID.touched || submitted)">
       <span *ngIf="departmentID.errors.required"><p class="text-danger">Select a Department</p> </span>
     </div>
   </div>
@@ -89,12 +99,13 @@
   <div class="form-group">
     <label for="salary">Salary
     </label>
-    <input name="salary" type="number" #salary="ngModel" [(ngModel)]="employee.salary" class="form-control form-control-sm" required>
-    <div *ngIf="salary.invalid && (salary.dirty || salary.touched)">
+    <input name="salary" type="number" #salary="ngModel" [(ngModel)]="employee.salary" class="form-control form-control-sm" required
+    [ngClass]="{ 'is-invalid': salary.invalid && (salary.dirty || salary.touched || submitted) }">
+    <div *ngIf="salary.invalid && (salary.dirty || salary.touched || submitted)">
         <span *ngIf="salary.errors.required"><p class="text-danger">Salary Field is Required</p> </span>
       </div>
   </div>
   <div class="form-group">
-    <button type="submit"  class="btn btn-success btn-lg btn-block" [disabled]="form.invalid">Store</button>
+    <button type="submit"  class="btn btn-success btn-lg btn-block">Store</button>
   </div>
 </form>

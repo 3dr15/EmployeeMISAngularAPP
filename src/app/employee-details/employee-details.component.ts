@@ -17,12 +17,14 @@ export class EmployeeDetailsComponent implements OnInit {
   @Input() employee: Employee;
   @Output() Notify = new EventEmitter<boolean>();
   file: any;
+  submitted: boolean;
 
   constructor(protected employeeService: EmployeeService, protected departmentService: DepartmentService) { }
 
   ngOnInit() {
     this.resetFormFields();
     this.getDepartments();
+    this.submitted = false;
   }
 
   // File Handeling Start
@@ -67,6 +69,8 @@ export class EmployeeDetailsComponent implements OnInit {
           this.updateEmployee(formData);
         }
       }
+    } else {
+      this.submitted = true;
     }
   }
 

@@ -22,6 +22,7 @@
           <td>{{ employee.firstName | uppercase }} {{ employee.lastName | uppercase }}</td>
           <td><a href='mailto:{{ employee.email }}'>{{ employee.email }}</a></td>
           <td>{{ employee.phoneNumber }}</td>
+          <td><a [routerLink]="['/employee/document',employee.employeeID]" routerLinkActive="active"  >DOC</a></td>
           <td><button class="btn btn-outline-info" (click)="onSelect(employee)"><i class="fa fa-edit fa-lg"></i></button></td>
           <td><button class="btn btn-outline-danger" (click)="onDelete(employee)"><i class="fa fa-trash fa-lg"></i></button></td>
         </tr>

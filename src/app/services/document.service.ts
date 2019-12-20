@@ -7,12 +7,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DocumentService {
+  // readonly apiRoot: string = 'https://localhost:44391/api';
   readonly apiRoot: string = 'https://api.employeemis.com/api';
   constructor(private httpClient: HttpClient) { }
 
-  getDocument(id: any): Observable<HttpResponse<Blob>> {
+  getDocument(id: any): Observable<Blob> {
     return this.httpClient
-    .get(this.apiRoot + '/employeeDocument/' + id, { observe: 'response', responseType: 'blob' } );
+    .get(this.apiRoot + '/employeeDocument/' + id, { responseType: 'blob' } );
   }
+
+  // getDoc(id: any): Observable<any> {
+  //   return this.httpClient
+  //   .get<any>(this.apiRoot + '/employeeDocument/' + id, { observe: 'response', responseType: 'blob' } );
+  // }
 
 }

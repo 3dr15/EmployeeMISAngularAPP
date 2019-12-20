@@ -39,9 +39,9 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fileLoad(Efile) {     // Functions as a onload event for FileReader class
-    const binaryString = Efile.target.result;     // Converts that file to binary
-    this.file = btoa(binaryString);               // Converts that file to base64 String from binary
-    console.log(btoa(binaryString));
+    const binaryString = Efile.target.result;     // Gives Binary string
+    this.file = btoa(binaryString);               // Converts that Binary string to base64 String from binary
+    // console.log(btoa(binaryString));
   }
   // File Handeling End
 
@@ -59,7 +59,7 @@ export class EmployeeDetailsComponent implements OnInit {
       // formData.value.docProofLink = btoa(formData.value.docProofLink);
       formData.value.docProofLink = this.file;
 
-      // console.log(formData.value.docProofLink);
+      console.log(formData.value);
       // return;
 
       if (formData.value.employeeID === 0) {
@@ -80,6 +80,7 @@ export class EmployeeDetailsComponent implements OnInit {
       success => {
         alert('Successfull');
         this.resetFormFields();
+        this.submitted = false;
         this.setNotification(true);
       },
       error => {
@@ -96,6 +97,7 @@ export class EmployeeDetailsComponent implements OnInit {
         alert('Successfull');
         // this.getEmployees();
         this.resetFormFields();
+        this.submitted = false;
         this.setNotification(true);
       },
       error => {

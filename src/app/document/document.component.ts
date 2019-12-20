@@ -14,8 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class DocumentComponent implements OnInit {
 
-  file: HttpResponse<Blob>;
-  imgUrl: string;
+  imgUrl: any;
   base64data: any;
   constructor(
     private docService: DocumentService,
@@ -29,22 +28,11 @@ export class DocumentComponent implements OnInit {
 
   private getDocumentStr(): void {
     const ID = this.route.snapshot.paramMap.get('id');
-    this.docService.getDocument(ID).subscribe(byteString => { this.file = byteString; } );
-
-    console.log('neeche dekh');
-    // console.log(btoa(this.file));
-    // console.log(atob(this.file.toString()));
-
-    console.log('uper dekh');
-
-    // this.imgUrl = this.file.toString();
-    // console.log(this.file);
-    const reader = new FileReader();
-    // reader.onload = (e) => this.imgUrl = e.target.result;
-    // reader.readAsDataURL(this.file);
-    // reader.onloadend = (e) => this.base64data = reader.result;
-    // this.imgUrl = this.sanitizer.bypassSecurityTrustUrl(this.base64data);
-    // this.imgUrl = this.base64data;
-    // console.log(this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + this.base64data));
+    this.docService.getDocument(ID).subscribe(byteString => {
+      const objUrl = URL.createObjectURL(byteString);
+      this.imgUrl = this.sanitizer.bypassSecurityTrustUrl(objUrl);
+    } );
+    // Solution to use Blob Object
+    // https://stackoverflow.com/questions/55591871/view-blob-response-as-image-in-angular
   }
 }

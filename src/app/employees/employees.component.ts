@@ -22,6 +22,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   onSelect(employee: Employee): void {
+    employee.docProofLink = '';
     this.selectedEmp = employee;
   }
 

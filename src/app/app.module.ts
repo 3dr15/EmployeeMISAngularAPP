@@ -9,6 +9,9 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DocumentComponent } from './document/document.component';
+import { DepartmentsComponent } from './department/departments/departments.component';
+import { EmployeesInDepartmentComponent } from './department/employees-in-department/employees-in-department.component';
+import { SearchComponent } from './employees/search/search.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { DocumentComponent } from './document/document.component';
       AppComponent,
       EmployeesComponent,
       EmployeeDetailsComponent,
-      DocumentComponent
+      DocumentComponent,
+      DepartmentsComponent,
+      EmployeesInDepartmentComponent,
+      SearchComponent
    ],
    imports: [
       BrowserModule,

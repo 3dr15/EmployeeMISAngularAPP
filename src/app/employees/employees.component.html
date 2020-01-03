@@ -6,6 +6,7 @@
   </div>
   <div class="col-md-8">
     <h3>Employees List</h3>
+    <app-search></app-search>
     <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -22,7 +23,7 @@
           <td>{{ employee.firstName | uppercase }} {{ employee.lastName | uppercase }}</td>
           <td><a href='mailto:{{ employee.email }}'>{{ employee.email }}</a></td>
           <td>{{ employee.phoneNumber }}</td>
-          <td><a [routerLink]="['/employee/document',employee.employeeID]" target="_blank" routerLinkActive="active"  >DOC</a></td>
+          <td><a [routerLink]="['/employee/document',employee.employeeID]" target="_blank" routerLinkActive="active" class="btn btn-outline-primary" ><i class="fa fa-file-picture-o"></i></a></td>
           <td><button class="btn btn-outline-info" (click)="onSelect(employee)"><i class="fa fa-edit fa-lg"></i></button></td>
           <td><button class="btn btn-outline-danger" (click)="onDelete(employee)"><i class="fa fa-trash fa-lg"></i></button></td>
         </tr>

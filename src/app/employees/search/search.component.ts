@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit {
 
   searchString: string;
   employee: Employee[];
+  submitted: boolean;
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
@@ -19,7 +20,13 @@ export class SearchComponent implements OnInit {
   }
 
   private onSearch(formData: NgForm){
-    console.log(formData.value.searchString );
-    this.employeeService.searchEmployees(this.searchString).subscribe(emp => this.employee = emp);
+    if (!formData.invalid) {
+      console.log(formData.value.searchString );
+      this.employeeService.searchEmployees(this.searchString).subscribe(emp => this.employee = emp);
+      console.log(this.employee)
+      this.submitted = true;
+    } else {
+      this.submitted = true;
+    }
   }
 }

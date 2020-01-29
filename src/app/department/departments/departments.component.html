@@ -1,3 +1,55 @@
-<p>
-  departments works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+
+      <form (ngSubmit)="submit()" [formGroup]="departmentFormGroup">
+        <input type="hidden" formControlName="departmentID">
+        <div class="form-group row mb-2">
+          <label class="col-md-3 col-form-label"
+                for="departmentNameId">Department Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                  id="departmentNameId"
+                  type="text"
+                  placeholder="Department Name (required)"
+                  formControlName="departmentName"
+                  [ngClass]="{'is-invalid': (departmentFormGroup.get('departmentName').touched || departmentFormGroup.get('departmentName').dirty) && !departmentFormGroup.get('departmentName').valid && submitted }" />
+            
+            <span class="invalid-feedback">
+              <span *ngIf="(departmentFormGroup.get('departmentName').errors?.required) && submitted ">
+                Please enter Department name.
+              </span>
+              <span *ngIf="(departmentFormGroup.get('departmentName').errors?.minlength) && submitted">
+                The department name must be longer than 3 characters.
+              </span>
+            </span>
+          </div>
+          <button type="submit" class="btn btn-success btn-lg btn-block">Save</button>
+          <button type="button" (click)="createDepartmentFormGroup()" class="btn btn-dark btn-lg btn-block">Reset</button>
+        </div>
+      </form>
+
+
+    </div>
+    <div class="col-md-6">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Sno.</th>
+            <th>Department</th>
+            <!-- <th>Number of Employees</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let department of departments">
+            <td>{{ department.departmentID }}</td>
+            <td>{{ department.departmentName }}</td>
+            <!-- <td>{{ department.employees?.length }}</td> -->
+            <td><button class="btn btn-outline-info" (click)="onEdit(department)"><i class="fa fa-edit fa-lg"></i></button></td>
+            <td><button class="btn btn-outline-danger" (click)="onDelete(department)"><i class="fa fa-trash fa-lg"></i></button></td>
+          </tr>          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

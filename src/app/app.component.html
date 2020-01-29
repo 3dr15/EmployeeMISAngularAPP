@@ -6,19 +6,29 @@
   </ul>
 </nav> -->
 <div class="toast mt-4" style="float: right; z-index: 3;">
-    <div class="toast-header">
+  <div class="toast-header">
 
-    </div>
-    <div class="toast-body">
-      
-    </div>
   </div>
-<div style="text-align:center">
-  <h1>
+  <div class="toast-body">
+    
+  </div>
+</div>
+
+<ul class="nav nav-tabs nav-justified">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/employees']" routerLinkActive="active">Employees</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/departments']" routerLinkActive="active" >Departments</a>
+  </li>
+</ul>
+
+<div style="text-align:center" class="mt-8">
+  <h1 class="mt-4">
     Welcome to {{ title }}!
   </h1>
 </div>
-<div class="container">
+<div class="container mt-4">
     <div class="row">
       <div class="col-md-12">
         <router-outlet></router-outlet>

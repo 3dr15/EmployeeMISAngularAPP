@@ -5,8 +5,28 @@
     <app-employee-details [employee]="selectedEmp" (Notify)="getNotification($event)"></app-employee-details>
   </div>
   <div class="col-md-8">
-    <h3>Employees List</h3>
-    <!-- <app-search></app-search> -->
+    <h3>Employees</h3>
+    
+    <form #form="ngForm"  autocomplete="off" (submit)="onSearch(form)">
+      <div class="input-group mb-3">
+        <input class="form-control" type="text"
+                                    name="searchString" 
+                                    [ngModel]="searchString" 
+                                    placeholder="Search" 
+                                    required 
+                                    >
+        <div class="input-group-append">
+          <button class="btn btn-success" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="NotFound">
+      <div class="alert alert-warning alert-dismissible">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+        <strong>Results for '{{ searchString }}' Not Found </strong> 
+      </div>
+    </div>
     <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -27,8 +47,18 @@
           <td><button class="btn btn-outline-info" (click)="onSelect(employee)"><i class="fa fa-edit fa-lg"></i></button></td>
           <td><button class="btn btn-outline-danger" (click)="onDelete(employee)"><i class="fa fa-trash fa-lg"></i></button></td>
         </tr>
+        <tr>
+          <td colspan="7">
+            <div class="justify-content-end btn-group" style="margin:20px 0">
+              <button class="btn btn-outline-primary" (click)="previous()" [ngClass]="{'disabled': (currentPage <= 1)}">Previous</button>
+              <button *ngFor="let page of numberOfPages" class="btn btn-outline-primary" [ngClass]="{'active': currentPage === page }" (click)="gotoPage(page)"> {{ page }} </button>
+              <button class="btn btn-outline-primary" (click)="next()" [ngClass]="{'disabled': numberOfPages.length === currentPage }">Next</button>
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
+    
     </div>
   </div>
 </div>

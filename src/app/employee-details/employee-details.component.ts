@@ -1,5 +1,4 @@
 import { DepartmentService } from './../services/department.service';
-import { from } from 'rxjs';
 import { Employee } from '../model/employee';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EmployeeService } from '../services/employee.service';

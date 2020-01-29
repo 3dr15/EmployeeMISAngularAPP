@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DocumentService {
-  // readonly apiRoot: string = 'https://localhost:44391/api';
+  readonly apiRoot: string = 'https://localhost:44391/api';
   // readonly apiRoot: string = 'https://api.employeemis.com/api';
-  readonly apiRoot: string = 'https://api.employeemis.com/EmpApi/api';
+  // readonly apiRoot: string = 'https://api.employeemis.com/EmpApi/api';
   constructor(private httpClient: HttpClient) { }
 
   getDocument(id: any): Observable<Blob> {

@@ -1,24 +1,10 @@
-<!-- <div *ngIf="employee">
-
-  <h2>{{employee.firstName | uppercase }} {{employee.lastName | uppercase}} Details</h2>
-  <div><span>id: </span>{{ employee.id }}</div>
-  <div>
-    <label>First Name:
-      <input [(ngModel)]="employee.firstName" placeholder="employee.firstName"/>
-    </label>
-    <label>Last Name:
-      <input [(ngModel)]="employee.lastName" placeholder="employee.lastName"/>
-    </label>
-  </div>
-
-</div> -->
 <form #form="ngForm"  autocomplete="off" (submit)="onSubmit(form)" enctype="multipart/form-data">
   <input type="hidden" name="employeeID" #id="ngModel" [(ngModel)]="employee.employeeID" required>
   <div class="form-group">
     <label for="firstName">First Name
     </label>
     <input name="firstName" pattern="[a-z A-Z]+" #firstName="ngModel" 
-    [(ngModel)]="employee.firstName" 
+    [(ngModel)]="employee.firstName"
     class="form-control form-control-sm" required 
     [ngClass]="{ 'is-invalid': firstName.invalid && submitted }">
     <div *ngIf="firstName.invalid && submitted">
@@ -89,6 +75,7 @@
     </label>
     <select name="departmentID" type="number" #departmentID="ngModel" [(ngModel)]="employee.departmentID" class="form-control form-control-sm" required
     [ngClass]="{ 'is-invalid': departmentID.invalid && submitted }">
+    <option value="1">Test Dep</option>
       <option *ngFor="let department of departments" value="{{ department.departmentID }}">{{ department.departmentName }}</option>
     </select>
     <div *ngIf="departmentID.invalid && submitted">
@@ -107,5 +94,6 @@
   </div>
   <div class="form-group">
     <button type="submit"  class="btn btn-success btn-lg btn-block">Store</button>
+    <button type="button" (click)="resetFormFields()" class="btn btn-dark btn-lg btn-block">Reset</button>
   </div>
 </form>

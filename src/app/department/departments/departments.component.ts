@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Department } from 'src/app/model/department';
 import { DepartmentService } from 'src/app/services/department.service';
+import { error } from 'util';
 
 @Component({
   selector: 'app-departments',
@@ -13,6 +14,7 @@ export class DepartmentsComponent implements OnInit {
   submitted: boolean = false;
   departments: Department[];
   departmentFormGroup: FormGroup;
+
   constructor(private formBuilder: FormBuilder,
               private departmentService: DepartmentService) { }
 

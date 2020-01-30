@@ -32,6 +32,23 @@
 
     </div>
     <div class="col-md-6">
+
+      <!-- <form (ngSubmit)="onSearch()"
+            [formGroup]="searchDepartmentFormGroup">
+        <div class="input-group mb-3">
+          <input class="form-control" type="text"
+                                      formControlName="searchString"                                       
+                                      placeholder="Search" 
+                                      required 
+                                      >
+          <div class="input-group-append">
+            <button class="btn btn-success" type="submit">Search</button>
+          </div>
+        </div>
+      </form> -->
+
+
+
       <table class="table table-hover">
         <thead>
           <tr>
@@ -41,8 +58,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let department of departments">
-            <td>{{ department.departmentID }}</td>
+          <tr *ngFor="let department of departments; let i = index">
+            <!-- <td>{{ department.departmentID }}</td> -->
+            <td>{{ i+1 }}</td>
             <td>{{ department.departmentName }}</td>
             <!-- <td>{{ department.employees?.length }}</td> -->
             <td><button class="btn btn-outline-info" (click)="onEdit(department)"><i class="fa fa-edit fa-lg"></i></button></td>

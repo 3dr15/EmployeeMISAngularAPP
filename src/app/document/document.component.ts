@@ -1,10 +1,6 @@
-import { DocumentBase64Str } from './../model/documentBase64Str';
 import { DocumentService } from './../services/document.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -15,7 +11,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class DocumentComponent implements OnInit {
 
   imgUrl: any;
-  base64data: any;
   constructor(
     private docService: DocumentService,
     private route: ActivatedRoute,
@@ -28,8 +23,9 @@ export class DocumentComponent implements OnInit {
 
   private getDocumentStr(): void {
     const ID = this.route.snapshot.paramMap.get('id');
-    this.docService.getDocument(ID).subscribe(byteString => {
-      const objUrl = URL.createObjectURL(byteString);
+    this.docService.getDocument(ID).subscribe(blobObj => {
+      // console.log(blobObj);
+      const objUrl = URL.createObjectURL(blobObj);
       this.imgUrl = this.sanitizer.bypassSecurityTrustUrl(objUrl);
     } );
     // Solution to use Blob Object

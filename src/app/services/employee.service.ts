@@ -10,9 +10,8 @@ import { FormsModule, NgForm } from '@angular/forms';
   providedIn: 'root'
 })
 export class EmployeeService {
-  readonly apiRoot: string = 'https://localhost:44391/api';
-  // readonly apiRoot: string = 'https://api.employeemis.com/api';
-  // readonly apiRoot: string = 'https://api.employeemis.com/EmpApi/api';
+  // readonly apiRoot: string = 'https://localhost:44391/api';
+  readonly apiRoot: string = 'http://api.empmis.com/api';
 
   constructor(private httpClient: HttpClient) { }
 

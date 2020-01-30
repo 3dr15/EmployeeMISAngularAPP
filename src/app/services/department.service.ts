@@ -7,10 +7,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DepartmentService {
-  readonly apiRoot: string = 'https://localhost:44391/api';
-  // readonly apiRoot: string = 'https://api.employeemis.com/api';
-  // readonly apiRoot: string = 'https://api.employeemis.com/EmpApi/api';
+  // readonly apiRoot: string = 'https://localhost:44391/api';
+  readonly apiRoot: string = 'http://api.empmis.com/api';
   constructor(private httpClient: HttpClient) { }
+
+  searchDepartments(searchString: string): Observable<Department[]>{
+    return this.httpClient.get<Department[]>(this.apiRoot + "/department/search/" + searchString);
+  }
 
   getDepartments(): Observable<Department[]> {
     return this.httpClient.get<Department[]>(this.apiRoot + '/department');

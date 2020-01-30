@@ -75,7 +75,7 @@
     </label>
     <select name="departmentID" type="number" #departmentID="ngModel" [(ngModel)]="employee.departmentID" class="form-control form-control-sm" required
     [ngClass]="{ 'is-invalid': departmentID.invalid && submitted }">
-    <option value="1">Test Dep</option>
+    <!-- <option value="1">Test Dep</option> -->
       <option *ngFor="let department of departments" value="{{ department.departmentID }}">{{ department.departmentName }}</option>
     </select>
     <div *ngIf="departmentID.invalid && submitted">

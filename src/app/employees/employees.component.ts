@@ -25,7 +25,7 @@ export class EmployeesComponent implements OnInit {
   // employees: string;
   selectedEmp: Employee;
   ngOnInit() {
-    this.getEmployees(1);
+    this.getEmployees(this.currentPage);
     // this.resetFormFields();
     this.employeeService.getEmployeesCount().subscribe({
       next: (num : number)=>{
@@ -55,14 +55,14 @@ export class EmployeesComponent implements OnInit {
         error => {
 
           this.NotFound = true;
-          this.getEmployees(1);
+          this.getEmployees(this.currentPage);
           console.log("its error");
           console.log(error);
         }
       );
     }else{
       this.NotFound = false;
-      this.getEmployees(1);
+      this.getEmployees(this.currentPage);
     }
   }
 
@@ -97,7 +97,7 @@ export class EmployeesComponent implements OnInit {
 
   getNotification(event: any) {
     if (event === true) {
-      this.getEmployees(1);
+      this.getEmployees(this.currentPage);
     }
   }
 

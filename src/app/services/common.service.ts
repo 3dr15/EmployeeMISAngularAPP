@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
-  // readonly apiRoot: string = 'https://localhost:44391/api';
-  readonly apiRoot: string = 'http://api.empmis.com/api';
+  readonly apiRoot: string = 'https://localhost:44391/api';
+  // readonly apiRoot: string = 'http://api.empmis.com/api';
   constructor(private httpClient: HttpClient) { }
 
   // get<T>(url: string): Observable<T> {

@@ -100,6 +100,7 @@ export class EmployeeDetailsComponent implements OnInit {
         this.setNotification(true);
       },
       error => {
+        debugger;
         console.log(error);
         alert('Somthing Went Wrong');
         this.setNotification(false);

@@ -10,8 +10,8 @@ import { FormsModule, NgForm } from '@angular/forms';
   providedIn: 'root'
 })
 export class EmployeeService {
-  readonly apiRoot: string = 'https://localhost:44391/api';
-  // readonly apiRoot: string = 'http://api.empmis.com/api';
+  // readonly apiRoot: string = 'https://localhost:44391/api';
+  readonly apiRoot: string = 'http://api.empmis.com/api';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -37,11 +37,13 @@ export class EmployeeService {
   }
 
   postEmployee(employeeFormData: Employee): Observable<object> {
-    return this.httpClient.post(this.apiRoot + '/employee', employeeFormData);
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
+    return this.httpClient.post(this.apiRoot + '/employee', employeeFormData, {headers : headers, withCredentials: true});
   }
 
   updateEmployee(employeeFormData: Employee): Observable<object> {
-    return this.httpClient.put(this.apiRoot + '/employee/' + employeeFormData.employeeID, employeeFormData);
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
+    return this.httpClient.put(this.apiRoot + '/employee/' + employeeFormData.employeeID, employeeFormData, {headers : headers, withCredentials: true});
   }
 
   deleteEmployee(employee: Employee): Observable<object> {

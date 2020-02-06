@@ -11,9 +11,9 @@ RUN $(npm bin)/ng build --prod
 # stage 2
 FROM nginx as server
 # builder to nginx Engine 
-# COPY --from=builder /EmpMisAngular/dist/assets/ /etc/nginx/
+RUN rm /etc/nginx/nginx.conf
+COPY --from=builder /EmpMisAngular/dist/employee-MIS-angular-app/assets/nginx.conf /etc/nginx/
 COPY --from=builder /EmpMisAngular/dist/* /usr/share/nginx/html/
 # COPY /usr/share/nginx/html/assets/nginx.conf /etc/nginx/
-CMD ["nginx","-c","/usr/share/nginx/html/assets/nginx.conf"]
  
 EXPOSE 80

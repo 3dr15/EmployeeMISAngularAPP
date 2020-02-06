@@ -58,10 +58,11 @@ export class DepartmentsComponent implements OnInit {
   updateDepartment(department: Department): void{
     this.departmentService.updateDepartment(department).subscribe(
       success => {
-        alert("Departmetn Successfully updated");
+        alert("Department Successfully updated");
         this.submitted = false;
         this.createDepartmentFormGroup();
         this.getDepartments();
+        console.log(success);
       },
       error => {
         alert("Something Went Wrong");

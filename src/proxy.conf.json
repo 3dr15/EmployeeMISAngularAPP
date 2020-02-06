@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "http://api.employeemis.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

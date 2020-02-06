@@ -11,7 +11,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class EmployeeService {
   // readonly apiRoot: string = 'https://localhost:44391/api';
-  readonly apiRoot: string = 'http://api.empmis.com/api';
+  readonly apiRoot: string = 'http://api.employeemis.com/api';
+  // readonly apiRoot: string = 'http://localhost:8880/api';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -38,15 +39,16 @@ export class EmployeeService {
 
   postEmployee(employeeFormData: Employee): Observable<object> {
     const headers = new HttpHeaders({'Content-Type':'application/json'});
-    return this.httpClient.post(this.apiRoot + '/employee', employeeFormData, {headers : headers, withCredentials: true});
+    return this.httpClient.post(this.apiRoot + '/employee', employeeFormData, { headers : headers });
   }
 
   updateEmployee(employeeFormData: Employee): Observable<object> {
     const headers = new HttpHeaders({'Content-Type':'application/json'});
-    return this.httpClient.put(this.apiRoot + '/employee/' + employeeFormData.employeeID, employeeFormData, {headers : headers, withCredentials: true});
+    return this.httpClient.put(this.apiRoot + '/employee/' + employeeFormData.employeeID, employeeFormData, { headers : headers });
   }
 
   deleteEmployee(employee: Employee): Observable<object> {
+    // const headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.httpClient.delete(this.apiRoot + '/employee/' + employee.employeeID);
   }
 }

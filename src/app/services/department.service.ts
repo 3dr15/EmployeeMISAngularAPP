@@ -8,7 +8,10 @@ import { Injectable } from '@angular/core';
 })
 export class DepartmentService {
   // readonly apiRoot: string = 'https://localhost:44391/api';
-  readonly apiRoot: string = 'http://api.empmis.com/api';
+  readonly apiRoot: string = 'http://api.employeemis.com/api';
+  // readonly apiRoot: string = 'http://localhost:8880/api';
+
+
   constructor(private httpClient: HttpClient) { }
 
   searchDepartments(searchString: string): Observable<Department[]>{
@@ -30,6 +33,4 @@ export class DepartmentService {
   deleteDepartment(department: Department): Observable<object> {
     return this.httpClient.delete(this.apiRoot + '/Department/' + department.departmentID);
   }
-
-
 }
